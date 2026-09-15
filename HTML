@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mathematics Point | Management Dashboard</title>
+
+    <meta
+        name="description"
+        content="Mathematics Point student and coaching management dashboard."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         APP CONTAINER
+    ========================== -->
+    <div class="app">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-logo">MP</div>
+
+                <div class="brand-info">
+                    <h2>Mathematics Point</h2>
+                    <span>Management System</span>
+                </div>
+            </div>
+
+            <nav class="navigation">
+
+                <p class="nav-label">MAIN</p>
+
+                <button class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">⌂</span>
+                    <span>Dashboard</span>
+                </button>
+
+                <button class="nav-item" data-page="students">
+                    <span class="nav-icon">♙</span>
+                    <span>Students</span>
+                </button>
+
+                <button class="nav-item" data-page="fees">
+                    <span class="nav-icon">₹</span>
+                    <span>Fees</span>
+                </button>
+
+                <button class="nav-item" data-page="enquiries">
+                    <span class="nav-icon">☏</span>
+                    <span>Enquiries</span>
+                </button>
+
+                <button class="nav-item" data-page="attendance">
+                    <span class="nav-icon">✓</span>
+                    <span>Attendance</span>
+                </button>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">RS</div>
+
+                    <div>
+                        <strong>Rai Sir</strong>
+                        <span>Administrator</span>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+
+                <div>
+                    <p class="breadcrumb">MATHEMATICS POINT</p>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+
+                <div class="topbar-actions">
+
+                    <button class="icon-button" title="Notifications">
+                        🔔
+                        <span class="notification-dot"></span>
+                    </button>
+
+                    <div class="date-display">
+                        <span>Today</span>
+                        <strong id="current-date">15 September 2026</strong>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 DASHBOARD PAGE
+            ========================== -->
+            <section class="page active" id="dashboard-page">
+
+                <div class="welcome-section">
+
+                    <div>
+                        <p class="eyebrow">OVERVIEW</p>
+                        <h2>Good afternoon, Rai Sir 👋</h2>
+                        <p>
+                            Here's what's happening at Mathematics Point today.
+                        </p>
+                    </div>
+
+                    <button class="primary-button" id="add-student-btn">
+                        + Add Student
+                    </button>
+
+                </div>
+
+
+                <!-- =========================
+                     STAT CARDS
+                ========================== -->
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span class="stat-title">Total Students</span>
+                            <span class="stat-icon students-icon">♙</span>
+                        </div>
+
+                        <div class="stat-value">126</div>
+
+                        <div class="stat-footer positive">
+                            <span>↑ 8.2%</span>
+                            <span>vs last month</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span class="stat-title">Fees Collected</span>
+                            <span class="stat-icon fees-icon">₹</span>
+                        </div>
+
+                        <div class="stat-value">₹1.84L</div>
+
+                        <div class="stat-footer positive">
+                            <span>↑ 12.5%</span>
+                            <span>vs last month</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span class="stat-title">Pending Fees</span>
+                            <span class="stat-icon pending-icon">!</span>
+                        </div>
+
+                        <div class="stat-value">₹42.5K</div>
+
+                        <div class="stat-footer warning">
+                            <span>18 students</span>
+                            <span>need attention</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-header">
+                            <span class="stat-title">New Enquiries</span>
+                            <span class="stat-icon enquiry-icon">☏</span>
+                        </div>
+
+                        <div class="stat-value">12</div>
+
+                        <div class="stat-footer positive">
+                            <span>↑ 20%</span>
+                            <span>this week</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     DASHBOARD GRID
+                ========================== -->
+                <div class="dashboard-grid">
+
+                    <!-- RECENT STUDENTS -->
+                    <div class="panel recent-students">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <p class="panel-label">STUDENTS</p>
+                                <h3>Recent Students</h3>
+                            </div>
+
+                            <button class="text-button" data-page="students">
+                                View all →
+                            </button>
+
+                        </div>
+
+
+                        <div class="table-wrapper">
+
+                            <table>
+
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Class</th>
+                                        <th>Batch</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            <div class="student-cell">
+                                                <div class="student-avatar">AS</div>
+                                                <div>
+                                                    <strong>Aarav Sharma</strong>
+                                                    <span>Joined today</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>12th</td>
+                                        <td>Evening</td>
+                                        <td>
+                                            <span class="badge success">Active</span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="student-cell">
+                                                <div class="student-avatar">RJ</div>
+                                                <div>
+                                                    <strong>Riya Jain</strong>
+                                                    <span>Joined yesterday</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>11th</td>
+                                        <td>Evening</td>
+                                        <td>
+                                            <span class="badge success">Active</span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="student-cell">
+                                                <div class="student-avatar">AV</div>
+                                                <div>
+                                                    <strong>Aditya Verma</strong>
+                                                    <span>Joined 2 days ago</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>JEE</td>
+                                        <td>Morning</td>
+                                        <td>
+                                            <span class="badge success">Active</span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                            <div class="student-cell">
+                                                <div class="student-avatar">AG</div>
+                                                <div>
+                                                    <strong>Ananya Gupta</strong>
+                                                    <span>Joined 3 days ago</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>10th</td>
+                                        <td>Afternoon</td>
+                                        <td>
+                                            <span class="badge success">Active</span>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FOLLOW UPS -->
+                    <div class="panel followups">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <p class="panel-label">ACTION REQUIRED</p>
+                                <h3>Follow-ups</h3>
+                            </div>
+
+                            <span class="count-badge">5</span>
+
+                        </div>
+
+
+                        <div class="followup-list">
+
+                            <div class="followup-item">
+
+                                <div class="followup-icon">₹</div>
+
+                                <div class="followup-info">
+                                    <strong>Fee Follow-up</strong>
+                                    <span>Riya Jain · ₹4,500 pending</span>
+                                </div>
+
+                                <span class="followup-date">Today</span>
+
+                            </div>
+
+
+                            <div class="followup-item">
+
+                                <div class="followup-icon">☏</div>
+
+                                <div class="followup-info">
+                                    <strong>New Enquiry</strong>
+                                    <span>Parent of Rahul · Class 12</span>
+                                </div>
+
+                                <span class="followup-date">Today</span>
+
+                            </div>
+
+
+                            <div class="followup-item">
+
+                                <div class="followup-icon">₹</div>
+
+                                <div class="followup-info">
+                                    <strong>Fee Follow-up</strong>
+                                    <span>Vikram Patel · ₹3,000 pending</span>
+                                </div>
+
+                                <span class="followup-date">Tomorrow</span>
+
+                            </div>
+
+
+                            <div class="followup-item">
+
+                                <div class="followup-icon">☏</div>
+
+                                <div class="followup-info">
+                                    <strong>Enquiry Follow-up</strong>
+                                    <span>Neha Singh · JEE</span>
+                                </div>
+
+                                <span class="followup-date">Tomorrow</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     LOWER DASHBOARD
+                ========================== -->
+                <div class="dashboard-grid lower-grid">
+
+                    <!-- ATTENDANCE -->
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <p class="panel-label">THIS WEEK</p>
+                                <h3>Attendance Overview</h3>
+                            </div>
+
+                            <span class="attendance-percentage">91.4%</span>
+
+                        </div>
+
+                        <div class="attendance-chart">
+
+                            <div class="chart-placeholder">
+                                <div class="chart-line"></div>
+
+                                <div class="chart-labels">
+                                    <span>Mon</span>
+                                    <span>Tue</span>
+                                    <span>Wed</span>
+                                    <span>Thu</span>
+                                    <span>Fri</span>
+                                    <span>Sat</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ENQUIRIES -->
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <p class="panel-label">LEADS</p>
+                                <h3>Recent Enquiries</h3>
+                            </div>
+
+                            <button class="text-button" data-page="enquiries">
+                                View all →
+                            </button>
+
+                        </div>
+
+
+                        <div class="enquiry-list">
+
+                            <div class="enquiry-item">
+
+                                <div class="enquiry-avatar">RK</div>
+
+                                <div class="enquiry-info">
+                                    <strong>Rahul Kumar</strong>
+                                    <span>Class 12 · JEE</span>
+                                </div>
+
+                                <span class="badge warning">Follow-up</span>
+
+                            </div>
+
+
+                            <div class="enquiry-item">
+
+                                <div class="enquiry-avatar">NS</div>
+
+                                <div class="enquiry-info">
+                                    <strong>Neha Singh</strong>
+                                    <span>Class 11 · Maths</span>
+                                </div>
+
+                                <span class="badge info">New</span>
+
+                            </div>
+
+
+                            <div class="enquiry-item">
+
+                                <div class="enquiry-avatar">VK</div>
+
+                                <div class="enquiry-info">
+                                    <strong>Vivek Kumar</strong>
+                                    <span>Class 10 · Maths</span>
+                                </div>
+
+                                <span class="badge success">Converted</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 STUDENTS PAGE
+            ========================== -->
+            <section class="page" id="students-page">
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">MANAGEMENT</p>
+                        <h2>Students</h2>
+                        <p>Manage all enrolled students.</p>
+                    </div>
+
+                    <button class="primary-button">
+                        + Add Student
+                    </button>
+
+                </div>
+
+                <div class="toolbar">
+
+                    <div class="search-box">
+                        <span>⌕</span>
+                        <input
+                            type="search"
+                            placeholder="Search students..."
+                            id="student-search"
+                        >
+                    </div>
+
+                    <select>
+                        <option>All Classes</option>
+                        <option>9th</option>
+                        <option>10th</option>
+                        <option>11th</option>
+                        <option>12th</option>
+                        <option>JEE</option>
+                    </select>
+
+                    <select>
+                        <option>All Status</option>
+                        <option>Active</option>
+                        <option>Inactive</option>
+                    </select>
+
+                </div>
+
+                <div class="panel">
+
+                    <div class="table-wrapper">
+
+                        <table class="full-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Class</th>
+                                    <th>Batch</th>
+                                    <th>Attendance</th>
+                                    <th>Fee Status</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Aarav Sharma</td>
+                                    <td>12th</td>
+                                    <td>Evening</td>
+                                    <td>94%</td>
+                                    <td><span class="badge success">Paid</span></td>
+                                    <td><span class="badge success">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Riya Jain</td>
+                                    <td>11th</td>
+                                    <td>Evening</td>
+                                    <td>89%</td>
+                                    <td><span class="badge danger">Pending</span></td>
+                                    <td><span class="badge success">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Aditya Verma</td>
+                                    <td>JEE</td>
+                                    <td>Morning</td>
+                                    <td>96%</td>
+                                    <td><span class="badge success">Paid</span></td>
+                                    <td><span class="badge success">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Ananya Gupta</td>
+                                    <td>10th</td>
+                                    <td>Afternoon</td>
+                                    <td>91%</td>
+                                    <td><span class="badge warning">Partial</span></td>
+                                    <td><span class="badge success">Active</span></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 FEES PAGE
+            ========================== -->
+            <section class="page" id="fees-page">
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">FINANCE</p>
+                        <h2>Fee Management</h2>
+                        <p>Track payments and outstanding fees.</p>
+                    </div>
+
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <span class="stat-title">Total Collected</span>
+                        <div class="stat-value">₹1.84L</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-title">Pending</span>
+                        <div class="stat-value">₹42.5K</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-title">Students Pending</span>
+                        <div class="stat-value">18</div>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <h3>Pending Payments</h3>
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table class="full-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Total Fee</th>
+                                    <th>Paid</th>
+                                    <th>Remaining</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Riya Jain</td>
+                                    <td>₹18,000</td>
+                                    <td>₹13,500</td>
+                                    <td>₹4,500</td>
+                                    <td>18 Sep 2026</td>
+                                    <td><span class="badge danger">Pending</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Ananya Gupta</td>
+                                    <td>₹15,000</td>
+                                    <td>₹10,000</td>
+                                    <td>₹5,000</td>
+                                    <td>20 Sep 2026</td>
+                                    <td><span class="badge warning">Partial</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Vikram Patel</td>
+                                    <td>₹12,000</td>
+                                    <td>₹9,000</td>
+                                    <td>₹3,000</td>
+                                    <td>21 Sep 2026</td>
+                                    <td><span class="badge danger">Pending</span></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ENQUIRIES PAGE
+            ========================== -->
+            <section class="page" id="enquiries-page">
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">LEADS</p>
+                        <h2>Enquiries</h2>
+                        <p>Track prospective students and follow-ups.</p>
+                    </div>
+
+                    <button class="primary-button">
+                        + Add Enquiry
+                    </button>
+
+                </div>
+
+                <div class="panel">
+
+                    <div class="table-wrapper">
+
+                        <table class="full-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Class</th>
+                                    <th>Interested In</th>
+                                    <th>Enquiry Date</th>
+                                    <th>Follow-up</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Rahul Kumar</td>
+                                    <td>12th</td>
+                                    <td>JEE Maths</td>
+                                    <td>14 Sep 2026</td>
+                                    <td>Today</td>
+                                    <td><span class="badge warning">Follow-up</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Neha Singh</td>
+                                    <td>11th</td>
+                                    <td>Mathematics</td>
+                                    <td>15 Sep 2026</td>
+                                    <td>17 Sep 2026</td>
+                                    <td><span class="badge info">New</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Vivek Kumar</td>
+                                    <td>10th</td>
+                                    <td>Mathematics</td>
+                                    <td>12 Sep 2026</td>
+                                    <td>—</td>
+                                    <td><span class="badge success">Converted</span></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 ATTENDANCE PAGE
+            ========================== -->
+            <section class="page" id="attendance-page">
+
+                <div class="page-heading">
+
+                    <div>
+                        <p class="eyebrow">STUDENTS</p>
+                        <h2>Attendance</h2>
+                        <p>Monitor student attendance and participation.</p>
+                    </div>
+
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <span class="stat-title">Today's Attendance</span>
+                        <div class="stat-value">92.6%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-title">Present Today</span>
+                        <div class="stat-value">117</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <span class="stat-title">Absent Today</span>
+                        <div class="stat-value">9</div>
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <p class="panel-label">TODAY</p>
+                            <h3>Student Attendance</h3>
+                        </div>
+
+                        <button class="primary-button">
+                            Mark Attendance
+                        </button>
+
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table class="full-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Class</th>
+                                    <th>Batch</th>
+                                    <th>Attendance</th>
+                                    <th>Today's Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>Aarav Sharma</td>
+                                    <td>12th</td>
+                                    <td>Evening</td>
+                                    <td>94%</td>
+                                    <td><span class="badge success">Present</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Riya Jain</td>
+                                    <td>11th</td>
+                                    <td>Evening</td>
+                                    <td>89%</td>
+                                    <td><span class="badge success">Present</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Aditya Verma</td>
+                                    <td>JEE</td>
+                                    <td>Morning</td>
+                                    <td>96%</td>
+                                    <td><span class="badge danger">Absent</span></td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
