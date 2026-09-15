@@ -900,6 +900,242 @@
 
 
     <!-- JAVASCRIPT -->
+    <!-- =========================
+     STUDENT PROFILE MODAL
+========================= -->
+
+<div class="student-modal" id="student-modal">
+
+    <div class="student-modal-overlay" id="student-modal-overlay"></div>
+
+    <div class="student-profile-card">
+
+        <button
+            class="student-modal-close"
+            id="student-modal-close"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+        <!-- PROFILE HEADER -->
+
+        <div class="profile-header">
+
+            <div class="profile-avatar" id="profile-avatar">
+                AS
+            </div>
+
+            <div class="profile-main-info">
+
+                <p class="eyebrow">STUDENT PROFILE</p>
+
+                <h2 id="profile-name">
+                    Aarav Sharma
+                </h2>
+
+                <p id="profile-course">
+                    Class 12 · Evening Batch
+                </p>
+
+                <span
+                    class="badge success"
+                    id="profile-status"
+                >
+                    Active
+                </span>
+
+            </div>
+
+        </div>
+
+        <!-- QUICK STATS -->
+
+        <div class="profile-stats">
+
+            <div class="profile-stat">
+                <span>Attendance</span>
+                <strong id="profile-attendance">94%</strong>
+            </div>
+
+            <div class="profile-stat">
+                <span>Total Fee</span>
+                <strong id="profile-total-fee">₹18,000</strong>
+            </div>
+
+            <div class="profile-stat">
+                <span>Paid</span>
+                <strong id="profile-paid">₹18,000</strong>
+            </div>
+
+            <div class="profile-stat">
+                <span>Pending</span>
+                <strong id="profile-pending">₹0</strong>
+            </div>
+
+        </div>
+
+        <!-- INFORMATION -->
+
+        <div class="profile-section">
+
+            <div class="profile-section-header">
+                <h3>Student Information</h3>
+            </div>
+
+            <div class="profile-info-grid">
+
+                <div>
+                    <span>Class</span>
+                    <strong id="profile-class">12th</strong>
+                </div>
+
+                <div>
+                    <span>Batch</span>
+                    <strong id="profile-batch">Evening</strong>
+                </div>
+
+                <div>
+                    <span>Enrollment Date</span>
+                    <strong id="profile-enrollment">
+                        15 Sep 2026
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Student Phone</span>
+                    <strong id="profile-phone">
+                        +91 98XXXXXX21
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Parent / Guardian</span>
+                    <strong id="profile-parent">
+                        Rajesh Sharma
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Parent Phone</span>
+                    <strong id="profile-parent-phone">
+                        +91 97XXXXXX42
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PAYMENT HISTORY -->
+
+        <div class="profile-section">
+
+            <div class="profile-section-header">
+
+                <h3>Payment History</h3>
+
+                <span class="profile-small-label">
+                    RECENT
+                </span>
+
+            </div>
+
+            <div class="payment-history">
+
+                <div class="payment-row">
+
+                    <div>
+                        <strong>Monthly Fee</strong>
+                        <span>05 Sep 2026</span>
+                    </div>
+
+                    <strong class="payment-amount">
+                        ₹6,000
+                    </strong>
+
+                    <span class="badge success">
+                        Paid
+                    </span>
+
+                </div>
+
+                <div class="payment-row">
+
+                    <div>
+                        <strong>Monthly Fee</strong>
+                        <span>05 Aug 2026</span>
+                    </div>
+
+                    <strong class="payment-amount">
+                        ₹6,000
+                    </strong>
+
+                    <span class="badge success">
+                        Paid
+                    </span>
+
+                </div>
+
+                <div class="payment-row">
+
+                    <div>
+                        <strong>Monthly Fee</strong>
+                        <span>05 Jul 2026</span>
+                    </div>
+
+                    <strong class="payment-amount">
+                        ₹6,000
+                    </strong>
+
+                    <span class="badge success">
+                        Paid
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- NOTES -->
+
+        <div class="profile-section">
+
+            <div class="profile-section-header">
+                <h3>Notes</h3>
+            </div>
+
+            <div class="profile-note">
+                Regular student. Strong performance in algebra and
+                calculus. Needs additional practice in geometry.
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="profile-actions">
+
+            <button
+                class="secondary-button"
+                id="edit-student-btn"
+            >
+                Edit Student
+            </button>
+
+            <button
+                class="primary-button"
+                id="profile-fee-btn"
+            >
+                Record Payment
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
     <script src="script.js"></script>
 
 </body>
