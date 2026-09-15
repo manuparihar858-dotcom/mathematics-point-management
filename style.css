@@ -1256,3 +1256,412 @@ tbody tr:hover {
         width: auto;
     }
 }
+/* =========================
+   STUDENT PROFILE MODAL
+========================= */
+
+.student-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    z-index: 1000;
+}
+
+.student-modal.active {
+    display: block;
+}
+
+.student-modal-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(7, 17, 31, 0.55);
+
+    backdrop-filter: blur(4px);
+}
+
+.student-profile-card {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(760px, calc(100% - 32px));
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 30px 80px rgba(7, 17, 31, 0.25);
+
+    padding: 30px;
+}
+
+.student-modal-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid var(--border);
+
+    background: white;
+
+    border-radius: 9px;
+
+    color: var(--text-soft);
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.student-modal-close:hover {
+    background: var(--surface);
+}
+
+/* PROFILE HEADER */
+
+.profile-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding-right: 45px;
+
+    margin-bottom: 25px;
+}
+
+.profile-avatar {
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dbeafe,
+            #edf4ff
+        );
+
+    color: var(--blue-500);
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 21px;
+
+    font-weight: 700;
+}
+
+.profile-main-info h2 {
+    margin-top: 4px;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 25px;
+
+    letter-spacing: -0.7px;
+}
+
+.profile-main-info p:not(.eyebrow) {
+    margin-top: 4px;
+
+    color: var(--text-soft);
+
+    font-size: 12px;
+}
+
+.profile-main-info .badge {
+    margin-top: 8px;
+}
+
+/* QUICK STATS */
+
+.profile-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.profile-stat {
+    padding: 15px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+}
+
+.profile-stat span {
+    display: block;
+
+    color: var(--text-soft);
+
+    font-size: 10px;
+}
+
+.profile-stat strong {
+    display: block;
+
+    margin-top: 6px;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+}
+
+/* PROFILE SECTIONS */
+
+.profile-section {
+    margin-top: 20px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    overflow: hidden;
+}
+
+.profile-section-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 15px 18px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: #fafbfd;
+}
+
+.profile-section-header h3 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 14px;
+}
+
+.profile-small-label {
+    color: var(--text-soft);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+/* INFORMATION GRID */
+
+.profile-info-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 0;
+
+}
+
+.profile-info-grid > div {
+    padding: 14px 18px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+.profile-info-grid > div:nth-child(odd) {
+    border-right: 1px solid #edf0f4;
+}
+
+.profile-info-grid span {
+    display: block;
+
+    color: var(--text-soft);
+
+    font-size: 9px;
+
+    margin-bottom: 4px;
+}
+
+.profile-info-grid strong {
+    font-size: 11px;
+}
+
+/* PAYMENT HISTORY */
+
+.payment-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr auto auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+.payment-row:last-child {
+    border-bottom: 0;
+}
+
+.payment-row strong {
+    font-size: 11px;
+}
+
+.payment-row div span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-soft);
+
+    font-size: 9px;
+}
+
+.payment-amount {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+/* NOTES */
+
+.profile-note {
+    padding: 17px 18px;
+
+    color: var(--text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+/* ACTIONS */
+
+.profile-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.secondary-button {
+    border: 1px solid var(--border);
+
+    background: white;
+
+    color: var(--text);
+
+    padding: 11px 17px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background: var(--surface);
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .student-profile-card {
+        padding: 20px;
+
+        width: calc(100% - 20px);
+
+        max-height: 94vh;
+    }
+
+    .profile-header {
+        align-items: flex-start;
+    }
+
+    .profile-avatar {
+        width: 58px;
+        height: 58px;
+
+        border-radius: 14px;
+
+        font-size: 17px;
+    }
+
+    .profile-main-info h2 {
+        font-size: 20px;
+    }
+
+    .profile-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .profile-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-info-grid > div:nth-child(odd) {
+        border-right: 0;
+    }
+
+    .payment-row {
+        grid-template-columns: 1fr auto;
+
+        gap: 8px;
+    }
+
+    .payment-row .badge {
+        grid-column: 1 / -1;
+
+        width: fit-content;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+    .profile-actions button {
+        width: 100%;
+    }
+}
