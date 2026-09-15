@@ -5,22 +5,106 @@ document.addEventListener("DOMContentLoaded", function () {
     const pageTitle = document.getElementById("page-title");
     const currentDate = document.getElementById("current-date");
 
-    // Update date
+    /* =========================
+       STUDENT DATA
+    ========================= */
+
+    const students = {
+
+        "Aarav Sharma": {
+            initials: "AS",
+            course: "Class 12 · Evening Batch",
+            className: "12th",
+            batch: "Evening",
+            status: "Active",
+            attendance: "94%",
+            totalFee: "₹18,000",
+            paid: "₹18,000",
+            pending: "₹0",
+            enrollment: "15 Sep 2026",
+            phone: "+91 98XXXXXX21",
+            parent: "Rajesh Sharma",
+            parentPhone: "+91 97XXXXXX42",
+            note: "Regular student. Strong performance in algebra and calculus. Needs additional practice in geometry."
+        },
+
+        "Riya Jain": {
+            initials: "RJ",
+            course: "Class 11 · Evening Batch",
+            className: "11th",
+            batch: "Evening",
+            status: "Active",
+            attendance: "89%",
+            totalFee: "₹18,000",
+            paid: "₹13,500",
+            pending: "₹4,500",
+            enrollment: "02 Aug 2026",
+            phone: "+91 99XXXXXX34",
+            parent: "Sanjay Jain",
+            parentPhone: "+91 98XXXXXX17",
+            note: "Good classroom participation. Fee follow-up required. Performing well in algebra."
+        },
+
+        "Aditya Verma": {
+            initials: "AV",
+            course: "JEE · Morning Batch",
+            className: "JEE",
+            batch: "Morning",
+            status: "Active",
+            attendance: "96%",
+            totalFee: "₹24,000",
+            paid: "₹24,000",
+            pending: "₹0",
+            enrollment: "10 Jul 2026",
+            phone: "+91 97XXXXXX52",
+            parent: "Amit Verma",
+            parentPhone: "+91 96XXXXXX83",
+            note: "Excellent attendance and strong problem-solving ability. Preparing for JEE Mathematics."
+        },
+
+        "Ananya Gupta": {
+            initials: "AG",
+            course: "Class 10 · Afternoon Batch",
+            className: "10th",
+            batch: "Afternoon",
+            status: "Active",
+            attendance: "91%",
+            totalFee: "₹15,000",
+            paid: "₹10,000",
+            pending: "₹5,000",
+            enrollment: "22 Aug 2026",
+            phone: "+91 98XXXXXX65",
+            parent: "Rakesh Gupta",
+            parentPhone: "+91 95XXXXXX41",
+            note: "Consistent performance. Needs additional practice before upcoming examinations."
+        }
+
+    };
+
+    /* =========================
+       DATE
+    ========================= */
+
     function updateDate() {
+
         if (!currentDate) return;
 
         const today = new Date();
 
-        currentDate.textContent = today.toLocaleDateString("en-IN", {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-        });
+        currentDate.textContent =
+            today.toLocaleDateString("en-IN", {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            });
     }
 
     updateDate();
 
-    // Page navigation
+    /* =========================
+       PAGE NAVIGATION
+    ========================= */
+
     function showPage(pageName) {
 
         pages.forEach(function (page) {
@@ -40,7 +124,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const selectedNav =
             document.querySelector(
-                '.nav-item[data-page="' + pageName + '"]'
+                '.nav-item[data-page="' +
+                pageName +
+                '"]'
             );
 
         if (selectedNav) {
@@ -66,20 +152,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Sidebar navigation
     navItems.forEach(function (item) {
 
         item.addEventListener("click", function () {
 
-            const pageName =
-                item.getAttribute("data-page");
+            showPage(
+                item.getAttribute("data-page")
+            );
 
-            showPage(pageName);
         });
 
     });
 
-    // View all buttons
     document.querySelectorAll("[data-page]").forEach(function (button) {
 
         if (button.classList.contains("nav-item")) {
@@ -94,125 +178,330 @@ document.addEventListener("DOMContentLoaded", function () {
             if (pageName) {
                 showPage(pageName);
             }
+
         });
 
     });
 
-    // Notification
+    /* =========================
+       STUDENT PROFILE
+    ========================= */
+
+    const modal =
+        document.getElementById("student-modal");
+
+    const modalOverlay =
+        document.getElementById("student-modal-overlay");
+
+    const closeModalButton =
+        document.getElementById("student-modal-close");
+
+    function openStudentProfile(name) {
+
+        const student = students[name];
+
+        if (!student || !modal) {
+            return;
+        }
+
+        document.getElementById("profile-name")
+            .textContent = name;
+
+        document.getElementById("profile-avatar")
+            .textContent = student.initials;
+
+        document.getElementById("profile-course")
+            .textContent = student.course;
+
+        document.getElementById("profile-status")
+            .textContent = student.status;
+
+        document.getElementById("profile-attendance")
+            .textContent = student.attendance;
+
+        document.getElementById("profile-total-fee")
+            .textContent = student.totalFee;
+
+        document.getElementById("profile-paid")
+            .textContent = student.paid;
+
+        document.getElementById("profile-pending")
+            .textContent = student.pending;
+
+        document.getElementById("profile-class")
+            .textContent = student.className;
+
+        document.getElementById("profile-batch")
+            .textContent = student.batch;
+
+        document.getElementById("profile-enrollment")
+            .textContent = student.enrollment;
+
+        document.getElementById("profile-phone")
+            .textContent = student.phone;
+
+        document.getElementById("profile-parent")
+            .textContent = student.parent;
+
+        document.getElementById("profile-parent-phone")
+            .textContent = student.parentPhone;
+
+        document.querySelector(".profile-note")
+            .textContent = student.note;
+
+        modal.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+        modal.setAttribute("data-student", name);
+    }
+
+    function closeStudentProfile() {
+
+        if (!modal) return;
+
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "";
+    }
+
+    /* =========================
+       CLICK STUDENT ROW
+    ========================= */
+
+    document.querySelectorAll(
+        "#students-page tbody tr"
+    ).forEach(function (row) {
+
+        row.style.cursor = "pointer";
+
+        row.addEventListener("click", function () {
+
+            const nameCell =
+                row.querySelector("td");
+
+            if (!nameCell) return;
+
+            const name =
+                nameCell.textContent.trim();
+
+            if (students[name]) {
+
+                openStudentProfile(name);
+
+            }
+
+        });
+
+    });
+
+    /* =========================
+       CLOSE PROFILE
+    ========================= */
+
+    if (closeModalButton) {
+
+        closeModalButton.addEventListener(
+            "click",
+            closeStudentProfile
+        );
+
+    }
+
+    if (modalOverlay) {
+
+        modalOverlay.addEventListener(
+            "click",
+            closeStudentProfile
+        );
+
+    }
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+                closeStudentProfile();
+            }
+
+        }
+    );
+
+    /* =========================
+       NOTIFICATION
+    ========================= */
+
     const notificationButton =
         document.querySelector(".icon-button");
 
     if (notificationButton) {
 
-        notificationButton.addEventListener("click", function () {
+        notificationButton.addEventListener(
+            "click",
+            function () {
 
-            showNotification(
-                "Notifications",
-                "You have 5 follow-ups requiring attention."
-            );
+                showNotification(
+                    "Notifications",
+                    "You have 5 follow-ups requiring attention."
+                );
 
-        });
+            }
+        );
+
     }
 
-    // Add student
+    /* =========================
+       ADD STUDENT
+    ========================= */
+
     const addStudentButton =
         document.getElementById("add-student-btn");
 
     if (addStudentButton) {
 
-        addStudentButton.addEventListener("click", function () {
+        addStudentButton.addEventListener(
+            "click",
+            function () {
 
-            showNotification(
-                "Demo Mode",
-                "Add Student form will open here."
-            );
+                showNotification(
+                    "Demo Mode",
+                    "Add Student form will open here."
+                );
 
-        });
+            }
+        );
+
     }
 
-    // Student search
+    /* =========================
+       SEARCH
+    ========================= */
+
     const searchInput =
         document.getElementById("student-search");
 
     if (searchInput) {
 
-        searchInput.addEventListener("input", function () {
+        searchInput.addEventListener(
+            "input",
+            function () {
 
-            const searchTerm =
-                searchInput.value.toLowerCase().trim();
+                const searchTerm =
+                    searchInput.value
+                        .toLowerCase()
+                        .trim();
 
-            const rows =
                 document.querySelectorAll(
                     "#students-page tbody tr"
-                );
+                ).forEach(function (row) {
 
-            rows.forEach(function (row) {
+                    row.style.display =
+                        row.textContent
+                            .toLowerCase()
+                            .includes(searchTerm)
+                            ? ""
+                            : "none";
 
-                const rowText =
-                    row.textContent.toLowerCase();
-
-                row.style.display =
-                    rowText.includes(searchTerm)
-                        ? ""
-                        : "none";
-            });
-
-        });
-    }
-
-    // Table row selection
-    document.querySelectorAll("tbody tr").forEach(function (row) {
-
-        row.addEventListener("click", function () {
-
-            row.parentElement
-                .querySelectorAll("tr")
-                .forEach(function (item) {
-                    item.classList.remove("selected-row");
                 });
 
-            row.classList.add("selected-row");
-        });
+            }
+        );
 
-    });
+    }
 
-    // Add enquiry buttons
+    /* =========================
+       DEMO BUTTONS
+    ========================= */
+
     document.querySelectorAll(
         "#enquiries-page .primary-button"
     ).forEach(function (button) {
 
-        button.addEventListener("click", function () {
+        button.addEventListener(
+            "click",
+            function () {
 
-            showNotification(
-                "Demo Mode",
-                "Add Enquiry form will open here."
-            );
+                showNotification(
+                    "Demo Mode",
+                    "Add Enquiry form will open here."
+                );
 
-        });
+            }
+        );
 
     });
 
-    // Attendance buttons
     document.querySelectorAll(
         "#attendance-page .primary-button"
     ).forEach(function (button) {
 
-        button.addEventListener("click", function () {
+        button.addEventListener(
+            "click",
+            function () {
 
-            showNotification(
-                "Demo Mode",
-                "Attendance marking will open here."
-            );
+                showNotification(
+                    "Demo Mode",
+                    "Attendance marking will open here."
+                );
 
-        });
+            }
+        );
 
     });
 
-    // Notification popup
+    /* =========================
+       PROFILE ACTIONS
+    ========================= */
+
+    const editStudentButton =
+        document.getElementById("edit-student-btn");
+
+    if (editStudentButton) {
+
+        editStudentButton.addEventListener(
+            "click",
+            function () {
+
+                showNotification(
+                    "Demo Mode",
+                    "Student editing will be available here."
+                );
+
+            }
+        );
+
+    }
+
+    const profileFeeButton =
+        document.getElementById("profile-fee-btn");
+
+    if (profileFeeButton) {
+
+        profileFeeButton.addEventListener(
+            "click",
+            function () {
+
+                showNotification(
+                    "Demo Mode",
+                    "Payment recording will be available here."
+                );
+
+            }
+        );
+
+    }
+
+    /* =========================
+       NOTIFICATION FUNCTION
+    ========================= */
+
     function showNotification(title, message) {
 
         const existing =
-            document.querySelector(".demo-notification");
+            document.querySelector(
+                ".demo-notification"
+            );
 
         if (existing) {
             existing.remove();
@@ -232,24 +521,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 <span>${message}</span>
             </div>
 
-            <button
-                class="notification-close"
-                aria-label="Close notification"
-            >×</button>
+            <button class="notification-close">
+                ×
+            </button>
         `;
 
         document.body.appendChild(notification);
 
-        const closeButton =
-            notification.querySelector(".notification-close");
-
-        if (closeButton) {
-
-            closeButton.addEventListener("click", function () {
-                notification.remove();
-            });
-
-        }
+        notification
+            .querySelector(".notification-close")
+            .addEventListener(
+                "click",
+                function () {
+                    notification.remove();
+                }
+            );
 
         setTimeout(function () {
 
@@ -260,38 +546,37 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 4000);
     }
 
-    // Keyboard shortcut: /
-    document.addEventListener("keydown", function (event) {
+    /* =========================
+       KEYBOARD SEARCH
+    ========================= */
 
-        if (
-            event.key === "/" &&
-            document.activeElement.tagName !== "INPUT" &&
-            document.activeElement.tagName !== "TEXTAREA"
-        ) {
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
-            event.preventDefault();
+            if (
+                event.key === "/" &&
+                document.activeElement.tagName !== "INPUT" &&
+                document.activeElement.tagName !== "TEXTAREA"
+            ) {
 
-            showPage("students");
+                event.preventDefault();
 
-            if (searchInput) {
-                searchInput.focus();
+                showPage("students");
+
+                if (searchInput) {
+                    searchInput.focus();
+                }
+
             }
+
         }
+    );
 
-        // Escape closes notification
-        if (event.key === "Escape") {
+    /* =========================
+       START DASHBOARD
+    ========================= */
 
-            const notification =
-                document.querySelector(".demo-notification");
-
-            if (notification) {
-                notification.remove();
-            }
-        }
-
-    });
-
-    // Start on dashboard
     showPage("dashboard");
 
 });
