@@ -1,109 +1,388 @@
-/* =========================================================
-   DEMO NOTIFICATION
-   ========================================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-.demo-notification {
-    position: fixed;
+    /* =========================
+       ELEMENTS
+    ========================= */
 
-    right: 25px;
-    bottom: 25px;
+    const navItems = document.querySelectorAll(".nav-item");
+    const pages = document.querySelectorAll(".page");
+    const pageTitle = document.getElementById("page-title");
+    const currentDate = document.getElementById("current-date");
 
-    width: 330px;
+    /* =========================
+       DATE
+    ========================= */
 
-    display: flex;
-    align-items: center;
+    function updateDate() {
+        if (!currentDate) return;
 
-    gap: 12px;
+        const today = new Date();
 
-    padding: 15px;
+        const options = {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        };
 
-    background: #ffffff;
-
-    border: 1px solid #e3e8ef;
-
-    border-radius: 13px;
-
-    box-shadow: 0 15px 40px rgba(7, 17, 31, 0.15);
-
-    z-index: 9999;
-
-    animation: notificationIn 0.3s ease;
-}
-
-.notification-symbol {
-    width: 32px;
-    height: 32px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 9px;
-
-    background: #e7f7ef;
-
-    color: #16845b;
-
-    font-weight: 700;
-}
-
-.demo-notification strong {
-    display: block;
-
-    font-size: 11px;
-}
-
-.demo-notification span {
-    display: block;
-
-    margin-top: 3px;
-
-    color: #687386;
-
-    font-size: 10px;
-}
-
-.notification-close {
-    margin-left: auto;
-
-    border: 0;
-
-    background: transparent;
-
-    color: #687386;
-
-    font-size: 20px;
-
-    cursor: pointer;
-}
-
-@keyframes notificationIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px);
+        currentDate.textContent = today.toLocaleDateString(
+            "en-IN",
+            options
+        );
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    updateDate();
+
+    /* =========================
+       PAGE NAVIGATION
+    ========================= */
+
+    function showPage(pageName) {
+
+        pages.forEach(function (page) {
+            page.classList.remove("active");
+        });
+
+        navItems.forEach(function (item) {
+            item.classList.remove("active");
+        });
+
+        const selectedPage = document.getElementById(
+            pageName + "-page"
+        );
+
+        if (selectedPage) {
+            selectedPage.classList.add("active");
+        }
+
+        const selectedNav = document.querySelector(
+            '.nav-item[data-page="' + pageName + '"]'
+        );
+
+        if (selectedNav) {
+            selectedNav.classList.add("active");
+        }
+
+        const titles = {
+            dashboard: "Dashboard",
+            students: "Students",
+            fees: "Fee Management",
+            enquiries: "Enquiries",
+            attendance: "Attendance"
+        };
+
+        if (pageTitle) {
+            pageTitle.textContent =
+                titles[pageName] || "Dashboard";
+        }
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     }
 
-}
+    navItems.forEach(function (item) {
 
-.selected-row {
-    background: #f3f7ff !important;
-}
+        item.addEventListener("click", function () {
 
-@media (max-width: 480px) {
+            const pageName =
+                item.getAttribute("data-page");
 
-    .demo-notification {
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-        width: auto;
+            showPage(pageName);
+        });
+
+    });
+
+    /* =========================
+       VIEW ALL BUTTONS
+    ========================= */
+
+    const pageButtons =
+        document.querySelectorAll("[data-page]");
+
+    pageButtons.forEach(function (button) {
+
+        if (button.classList.contains("nav-item")) {
+            return;
+        }
+
+        button.addEventListener("click", function () {
+
+            const pageName =
+                button.getAttribute("data-page");
+
+            if (pageName) {
+                showPage(pageName);
+            }
+
+        });
+
+    });
+
+    /* =========================
+       ADD STUDENT
+    ========================= */
+
+    const addStudentButton =
+        document.getElementById("add-student-btn");
+
+    if (addStudentButton) {
+
+        addStudentButton.addEventListener(
+            "click",
+            function () {
+
+                showNotification(
+                    "Demo Mode",
+                    "Add Student form will open here."
+                );
+
+            }
+        );
     }
 
-}
+    /* =========================
+       SEARCH STUDENTS
+    ========================= */
+
+    const searchInput =
+        document.getElementById("student-search");
+
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            "input",
+            function () {
+
+                const searchTerm =
+                    searchInput.value
+                        .toLowerCase()
+                        .trim();
+
+                const studentRows =
+                    document.querySelectorAll(
+                        "#students-page tbody tr"
+                    );
+
+                studentRows.forEach(function (row) {
+
+                    const rowText =
+                        row.textContent.toLowerCase();
+
+                    if (
+                        rowText.includes(searchTerm)
+                    ) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+
+                });
+
+            }
+        );
+    }
+
+    /* =========================
+       TABLE ROW SELECTION
+    ========================= */
+
+    const allRows =
+        document.querySelectorAll("tbody tr");
+
+    allRows.forEach(function (row) {
+
+        row.addEventListener("click", function () {
+
+            const tableRows =
+                row.parentElement.querySelectorAll("tr");
+
+            tableRows.forEach(function (item) {
+                item.classList.remove("selected-row");
+            });
+
+            row.classList.add("selected-row");
+
+        });
+
+    });
+
+    /* =========================
+       NOTIFICATION BUTTON
+    ========================= */
+
+    const notificationButton =
+        document.querySelector(".icon-button");
+
+    if (notificationButton) {
+
+        notificationButton.addEventListener(
+            "click",
+            function () {
+
+                showNotification(
+                    "Notifications",
+                    "You have 5 follow-ups requiring attention."
+                );
+
+            }
+        );
+    }
+
+    /* =========================
+       NOTIFICATION FUNCTION
+    ========================= */
+
+    function showNotification(title, message) {
+
+        const existing =
+            document.querySelector(".demo-notification");
+
+        if (existing) {
+            existing.remove();
+        }
+
+        const notification =
+            document.createElement("div");
+
+        notification.className =
+            "demo-notification";
+
+        notification.innerHTML = `
+            <div class="notification-symbol">✓</div>
+
+            <div>
+                <strong>${title}</strong>
+                <span>${message}</span>
+            </div>
+
+            <button
+                class="notification-close"
+                aria-label="Close notification"
+            >
+                ×
+            </button>
+        `;
+
+        document.body.appendChild(notification);
+
+        const closeButton =
+            notification.querySelector(
+                ".notification-close"
+            );
+
+        closeButton.addEventListener(
+            "click",
+            function () {
+
+                notification.remove();
+
+            }
+        );
+
+        setTimeout(function () {
+
+            if (notification) {
+                notification.remove();
+            }
+
+        }, 4000);
+    }
+
+    /* =========================
+       KEYBOARD SHORTCUT
+       Press "/" to search
+    ========================= */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "/" &&
+                document.activeElement.tagName !== "INPUT" &&
+                document.activeElement.tagName !== "TEXTAREA"
+            ) {
+
+                event.preventDefault();
+
+                if (searchInput) {
+                    showPage("students");
+                    searchInput.focus();
+                }
+
+            }
+
+            if (event.key === "Escape") {
+
+                const notification =
+                    document.querySelector(
+                        ".demo-notification"
+                    );
+
+                if (notification) {
+                    notification.remove();
+                }
+
+            }
+
+        }
+    );
+
+    /* =========================
+       ADD ENQUIRY DEMO
+    ========================= */
+
+    const enquiryButtons =
+        document.querySelectorAll(
+            "#enquiries-page .primary-button"
+        );
+
+    enquiryButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                showNotification(
+                    "Demo Mode",
+                    "Add Enquiry form will open here."
+                );
+
+            }
+        );
+
+    });
+
+    /* =========================
+       ATTENDANCE DEMO
+    ========================= */
+
+    const attendanceButtons =
+        document.querySelectorAll(
+            "#attendance-page .primary-button"
+        );
+
+    attendanceButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                showNotification(
+                    "Demo Mode",
+                    "Attendance marking will open here."
+                );
+
+            }
+        );
+
+    });
+
+    /* =========================
+       INITIAL PAGE
+    ========================= */
+
+    showPage("dashboard");
+
+});
