@@ -1,41 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =========================
-       ELEMENTS
-    ========================= */
-
     const navItems = document.querySelectorAll(".nav-item");
     const pages = document.querySelectorAll(".page");
     const pageTitle = document.getElementById("page-title");
     const currentDate = document.getElementById("current-date");
 
-    /* =========================
-       DATE
-    ========================= */
-
+    // Update date
     function updateDate() {
         if (!currentDate) return;
 
         const today = new Date();
 
-        const options = {
+        currentDate.textContent = today.toLocaleDateString("en-IN", {
             day: "numeric",
             month: "long",
             year: "numeric"
-        };
-
-        currentDate.textContent = today.toLocaleDateString(
-            "en-IN",
-            options
-        );
+        });
     }
 
     updateDate();
 
-    /* =========================
-       PAGE NAVIGATION
-    ========================= */
-
+    // Page navigation
     function showPage(pageName) {
 
         pages.forEach(function (page) {
@@ -46,17 +31,17 @@ document.addEventListener("DOMContentLoaded", function () {
             item.classList.remove("active");
         });
 
-        const selectedPage = document.getElementById(
-            pageName + "-page"
-        );
+        const selectedPage =
+            document.getElementById(pageName + "-page");
 
         if (selectedPage) {
             selectedPage.classList.add("active");
         }
 
-        const selectedNav = document.querySelector(
-            '.nav-item[data-page="' + pageName + '"]'
-        );
+        const selectedNav =
+            document.querySelector(
+                '.nav-item[data-page="' + pageName + '"]'
+            );
 
         if (selectedNav) {
             selectedNav.classList.add("active");
@@ -81,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Sidebar navigation
     navItems.forEach(function (item) {
 
         item.addEventListener("click", function () {
@@ -93,14 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    /* =========================
-       VIEW ALL BUTTONS
-    ========================= */
-
-    const pageButtons =
-        document.querySelectorAll("[data-page]");
-
-    pageButtons.forEach(function (button) {
+    // View all buttons
+    document.querySelectorAll("[data-page]").forEach(function (button) {
 
         if (button.classList.contains("nav-item")) {
             return;
@@ -114,125 +94,121 @@ document.addEventListener("DOMContentLoaded", function () {
             if (pageName) {
                 showPage(pageName);
             }
-
         });
 
     });
 
-    /* =========================
-       ADD STUDENT
-    ========================= */
-
-    const addStudentButton =
-        document.getElementById("add-student-btn");
-
-    if (addStudentButton) {
-
-        addStudentButton.addEventListener(
-            "click",
-            function () {
-
-                showNotification(
-                    "Demo Mode",
-                    "Add Student form will open here."
-                );
-
-            }
-        );
-    }
-
-    /* =========================
-       SEARCH STUDENTS
-    ========================= */
-
-    const searchInput =
-        document.getElementById("student-search");
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            function () {
-
-                const searchTerm =
-                    searchInput.value
-                        .toLowerCase()
-                        .trim();
-
-                const studentRows =
-                    document.querySelectorAll(
-                        "#students-page tbody tr"
-                    );
-
-                studentRows.forEach(function (row) {
-
-                    const rowText =
-                        row.textContent.toLowerCase();
-
-                    if (
-                        rowText.includes(searchTerm)
-                    ) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-
-                });
-
-            }
-        );
-    }
-
-    /* =========================
-       TABLE ROW SELECTION
-    ========================= */
-
-    const allRows =
-        document.querySelectorAll("tbody tr");
-
-    allRows.forEach(function (row) {
-
-        row.addEventListener("click", function () {
-
-            const tableRows =
-                row.parentElement.querySelectorAll("tr");
-
-            tableRows.forEach(function (item) {
-                item.classList.remove("selected-row");
-            });
-
-            row.classList.add("selected-row");
-
-        });
-
-    });
-
-    /* =========================
-       NOTIFICATION BUTTON
-    ========================= */
-
+    // Notification
     const notificationButton =
         document.querySelector(".icon-button");
 
     if (notificationButton) {
 
-        notificationButton.addEventListener(
-            "click",
-            function () {
+        notificationButton.addEventListener("click", function () {
 
-                showNotification(
-                    "Notifications",
-                    "You have 5 follow-ups requiring attention."
-                );
+            showNotification(
+                "Notifications",
+                "You have 5 follow-ups requiring attention."
+            );
 
-            }
-        );
+        });
     }
 
-    /* =========================
-       NOTIFICATION FUNCTION
-    ========================= */
+    // Add student
+    const addStudentButton =
+        document.getElementById("add-student-btn");
 
+    if (addStudentButton) {
+
+        addStudentButton.addEventListener("click", function () {
+
+            showNotification(
+                "Demo Mode",
+                "Add Student form will open here."
+            );
+
+        });
+    }
+
+    // Student search
+    const searchInput =
+        document.getElementById("student-search");
+
+    if (searchInput) {
+
+        searchInput.addEventListener("input", function () {
+
+            const searchTerm =
+                searchInput.value.toLowerCase().trim();
+
+            const rows =
+                document.querySelectorAll(
+                    "#students-page tbody tr"
+                );
+
+            rows.forEach(function (row) {
+
+                const rowText =
+                    row.textContent.toLowerCase();
+
+                row.style.display =
+                    rowText.includes(searchTerm)
+                        ? ""
+                        : "none";
+            });
+
+        });
+    }
+
+    // Table row selection
+    document.querySelectorAll("tbody tr").forEach(function (row) {
+
+        row.addEventListener("click", function () {
+
+            row.parentElement
+                .querySelectorAll("tr")
+                .forEach(function (item) {
+                    item.classList.remove("selected-row");
+                });
+
+            row.classList.add("selected-row");
+        });
+
+    });
+
+    // Add enquiry buttons
+    document.querySelectorAll(
+        "#enquiries-page .primary-button"
+    ).forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            showNotification(
+                "Demo Mode",
+                "Add Enquiry form will open here."
+            );
+
+        });
+
+    });
+
+    // Attendance buttons
+    document.querySelectorAll(
+        "#attendance-page .primary-button"
+    ).forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            showNotification(
+                "Demo Mode",
+                "Attendance marking will open here."
+            );
+
+        });
+
+    });
+
+    // Notification popup
     function showNotification(title, message) {
 
         const existing =
@@ -259,130 +235,63 @@ document.addEventListener("DOMContentLoaded", function () {
             <button
                 class="notification-close"
                 aria-label="Close notification"
-            >
-                ×
-            </button>
+            >×</button>
         `;
 
         document.body.appendChild(notification);
 
         const closeButton =
-            notification.querySelector(
-                ".notification-close"
-            );
+            notification.querySelector(".notification-close");
 
-        closeButton.addEventListener(
-            "click",
-            function () {
+        if (closeButton) {
 
+            closeButton.addEventListener("click", function () {
                 notification.remove();
+            });
 
-            }
-        );
+        }
 
         setTimeout(function () {
 
-            if (notification) {
+            if (document.body.contains(notification)) {
                 notification.remove();
             }
 
         }, 4000);
     }
 
-    /* =========================
-       KEYBOARD SHORTCUT
-       Press "/" to search
-    ========================= */
+    // Keyboard shortcut: /
+    document.addEventListener("keydown", function (event) {
 
-    document.addEventListener(
-        "keydown",
-        function (event) {
+        if (
+            event.key === "/" &&
+            document.activeElement.tagName !== "INPUT" &&
+            document.activeElement.tagName !== "TEXTAREA"
+        ) {
 
-            if (
-                event.key === "/" &&
-                document.activeElement.tagName !== "INPUT" &&
-                document.activeElement.tagName !== "TEXTAREA"
-            ) {
+            event.preventDefault();
 
-                event.preventDefault();
+            showPage("students");
 
-                if (searchInput) {
-                    showPage("students");
-                    searchInput.focus();
-                }
-
+            if (searchInput) {
+                searchInput.focus();
             }
-
-            if (event.key === "Escape") {
-
-                const notification =
-                    document.querySelector(
-                        ".demo-notification"
-                    );
-
-                if (notification) {
-                    notification.remove();
-                }
-
-            }
-
         }
-    );
 
-    /* =========================
-       ADD ENQUIRY DEMO
-    ========================= */
+        // Escape closes notification
+        if (event.key === "Escape") {
 
-    const enquiryButtons =
-        document.querySelectorAll(
-            "#enquiries-page .primary-button"
-        );
+            const notification =
+                document.querySelector(".demo-notification");
 
-    enquiryButtons.forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                showNotification(
-                    "Demo Mode",
-                    "Add Enquiry form will open here."
-                );
-
+            if (notification) {
+                notification.remove();
             }
-        );
+        }
 
     });
 
-    /* =========================
-       ATTENDANCE DEMO
-    ========================= */
-
-    const attendanceButtons =
-        document.querySelectorAll(
-            "#attendance-page .primary-button"
-        );
-
-    attendanceButtons.forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                showNotification(
-                    "Demo Mode",
-                    "Attendance marking will open here."
-                );
-
-            }
-        );
-
-    });
-
-    /* =========================
-       INITIAL PAGE
-    ========================= */
-
+    // Start on dashboard
     showPage("dashboard");
 
 });
